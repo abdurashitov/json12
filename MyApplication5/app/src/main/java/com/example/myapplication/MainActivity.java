@@ -16,7 +16,7 @@ import java.io.InputStreamReader;
 
 public class MainActivity extends AppCompatActivity {
 
-    TextView textView;
+    TextView idText , gasText , waterText , electricityText ;
     String k ="";
 
     public MainActivity() throws JSONException {
@@ -26,19 +26,30 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        textView = findViewById(R.id.text);
+        idText = findViewById(R.id.id);
+        gasText  = findViewById(R.id.gas);
+        waterText  = findViewById(R.id.water);
+        electricityText  = findViewById(R.id.electricity);
         try {
             JSONArray jsonArray = new JSONArray(readJsonFromFile());
             jsonArray.length();
-            JSONObject jsonRoot = new JSONObject(jsonArray.getJSONObject(1).toString());
-            Log.d("comunlka", "0");
+            Comunalka[] comunalka = new Comunalka[4];
             int id, gaz, water, electricity;
-            id = jsonRoot.getInt("id");
-            gaz = jsonRoot.getInt("gas");
-            water = jsonRoot.getInt("water");
-            electricity = jsonRoot.getInt("electricity");
-            Comunalka comunalka = new Comunalka(id, gaz, water, electricity);
-            int h = comunalka.getWater();
+            for (int i=0; i<=jsonArray.length();i++){
+                JSONObject jsonRoot = new JSONObject(jsonArray.getJSONObject(i).toString());
+                id = jsonRoot.getInt("id");
+                gaz = jsonRoot.getInt("gas");
+                water = jsonRoot.getInt("water");
+                electricity = jsonRoot.getInt("electricity");
+                comunalka[i] = new Comunalka(id, gaz, water, electricity);
+                idText.setText(idText.getText()+"\t"+comunalka[i].getId());
+                gasText.setText(gasText.getText()+"\t"+comunalka[i].getGas());
+                waterText.setText(waterText.getText()+"\t"+comunalka[i].getWater());
+                electricityText.setText(electricityText.getText()+"\t"+comunalka[i].getElectricity());
+            }
+
+
+
             Log.d("comunlka", comunalka.toString());
         } catch (JSONException e) {
             Log.d("comunlka", "1");
@@ -63,7 +74,6 @@ public class MainActivity extends AppCompatActivity {
                 Log.d("text ", s);
             }
         //Log.d("text ", s);
-        textView.setText(k);
         Log.d("r", k);
         return k;
         }
