@@ -1,0 +1,26 @@
+[
+  {
+    "gas": 8790,
+    "water": 8547,
+    "electricity": 5560,
+    "id": 1
+  },
+  {
+    "gas": 8810,
+    "water": 8551,
+    "electricity": 5570,
+    "id": 2
+  },
+  {
+    "gas": 8830,
+    "water": 8558,
+    "electricity": 5590,
+    "id": 3
+  },
+  {
+    "gas": 8855,
+    "water": 8577,
+    "electricity": 5598,
+    "id": 4
+  }
+]
